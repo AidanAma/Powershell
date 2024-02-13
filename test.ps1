@@ -1,0 +1,1 @@
+New-Item -ItemType Directory -Path ($home +'/Desktop/anothertest')
