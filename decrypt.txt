@@ -32,8 +32,8 @@ function TripleDES-DecryptFile {
 }
 
 # Example usage:
-$inputFilePath = "C:\Users\aidan\OneDrive\Desktop\HW\HackIoT Lab\fff.cpt"
-$outputFilePath = "C:\Users\aidan\OneDrive\Desktop\HW\HackIoT Lab\decrypt.exe"
+$inputFilePath = "$HOME\fff.cpt"
+$outputFilePath = "$HOME\decrypt.exe"
 $password = "YourActualPassphraseHere"
 
 TripleDES-DecryptFile -inputFilePath $inputFilePath -outputFilePath $outputFilePath -pass $password
