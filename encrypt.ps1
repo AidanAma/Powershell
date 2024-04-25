@@ -29,8 +29,8 @@ function TripleDES-EncryptFile {
 }
 
 # Example usage:
-$inputFilePath = "C:\Users\aidan\OneDrive\Desktop\XenoRAT\fff.exe"
-$outputFilePath = "C:\Users\aidan\OneDrive\Desktop\XenoRAT\fff.cpt"
+$inputFilePath = "C:\Users\aidan\OneDrive\Desktop\HW\HackIoT Lab\plaintext.txt"
+$outputFilePath = "C:\Users\aidan\OneDrive\Desktop\HW\HackIoT Lab\encrypted.cpt"
 $password = "YourActualPassphraseHere"
 
 TripleDES-EncryptFile -inputFilePath $inputFilePath -outputFilePath $outputFilePath -pass $password
