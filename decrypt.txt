@@ -1,5 +1,3 @@
-# Download txt, rename .ps1
-
 function TripleDES-DecryptFile {
     param (
         [string]$inputFilePath,
@@ -32,8 +30,8 @@ function TripleDES-DecryptFile {
 }
 
 # Example usage:
-$inputFilePath = "$HOME\fff.cpt"
-$outputFilePath = "$HOME\decrypt.exe"
+$inputFilePath = "C:\Users\aidan\OneDrive\Desktop\HW\HackIoT Lab\fff.cpt"
+$outputFilePath = "C:\Users\aidan\OneDrive\Desktop\HW\HackIoT Lab\decrypt.exe"
 $password = "YourActualPassphraseHere"
 
 TripleDES-DecryptFile -inputFilePath $inputFilePath -outputFilePath $outputFilePath -pass $password
