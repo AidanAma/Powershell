@@ -19,8 +19,11 @@ function TripleDES-EncryptFile {
         # Encrypt the content
         $encryptedBytes = $DESEncrypter.TransformFinalBlock($inputBytes, 0, $inputBytes.Length)
 
+        # Convert the encrypted bytes to Base64 string
+        $encryptedBase64 = [System.Convert]::ToBase64String($encryptedBytes)
+
         # Write the encrypted content to a new file
-        [System.IO.File]::WriteAllBytes($outputFilePath, $encryptedBytes)
+        Set-Content -Path $outputFilePath -Value $encryptedBase64 -Encoding Byte
 
         Write-Host "File encrypted successfully."
     } catch {
@@ -29,8 +32,8 @@ function TripleDES-EncryptFile {
 }
 
 # Example usage:
-$inputFilePath = "C:\Users\aidan\OneDrive\Desktop\HW\HackIoT Lab\plaintext.txt"
-$outputFilePath = "C:\Users\aidan\OneDrive\Desktop\HW\HackIoT Lab\encrypted.cpt"
+$inputFilePath = "CHANGE ME"
+$outputFilePath = "CHANGE ME"
 $password = "YourActualPassphraseHere"
 
 TripleDES-EncryptFile -inputFilePath $inputFilePath -outputFilePath $outputFilePath -pass $password
