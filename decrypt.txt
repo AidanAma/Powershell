@@ -9,15 +9,13 @@ function TripleDES-DecryptFile {
     $TripleDES = New-Object System.Security.Cryptography.TripleDESCryptoServiceProvider
     $TripleDES.Key = [System.Text.Encoding]::UTF8.GetBytes($key)
     $TripleDES.Mode = [System.Security.Cryptography.CipherMode]::ECB
+    $TripleDES.Padding = [System.Security.Cryptography.PaddingMode]::PKCS7
 
     try {
         $DESDecrypter = $TripleDES.CreateDecryptor()
 
         # Read the content of the encrypted file
-        $encryptedBase64 = Get-Content -Path $inputFilePath -Encoding Byte
-
-        # Convert Base64 string to bytes
-        $encryptedBytes = [System.Convert]::FromBase64String([System.Text.Encoding]::UTF8.GetString($encryptedBase64))
+        $encryptedBytes = [System.IO.File]::ReadAllBytes($inputFilePath)
 
         # Decrypt the content
         $decryptedBytes = $DESDecrypter.TransformFinalBlock($encryptedBytes, 0, $encryptedBytes.Length)
@@ -33,7 +31,7 @@ function TripleDES-DecryptFile {
 
 # Example usage:
 $inputFilePath = "$HOME\fff.cpt"
-$outputFilePath = "$HOME\fff.exe"
+$outputFilePath = "$HOME\decrypted.exe"
 $password = "YourActualPassphraseHere"
 
 TripleDES-DecryptFile -inputFilePath $inputFilePath -outputFilePath $outputFilePath -pass $password
