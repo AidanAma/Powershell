@@ -9,6 +9,7 @@ function TripleDES-EncryptFile {
     $TripleDES = New-Object System.Security.Cryptography.TripleDESCryptoServiceProvider
     $TripleDES.Key = [System.Text.Encoding]::UTF8.GetBytes($key)
     $TripleDES.Mode = [System.Security.Cryptography.CipherMode]::ECB
+    $TripleDES.Padding = [System.Security.Cryptography.PaddingMode]::PKCS7
 
     try {
         $DESEncrypter = $TripleDES.CreateEncryptor()
@@ -19,11 +20,8 @@ function TripleDES-EncryptFile {
         # Encrypt the content
         $encryptedBytes = $DESEncrypter.TransformFinalBlock($inputBytes, 0, $inputBytes.Length)
 
-        # Convert the encrypted bytes to Base64 string
-        $encryptedBase64 = [System.Convert]::ToBase64String($encryptedBytes)
-
         # Write the encrypted content to a new file
-        Set-Content -Path $outputFilePath -Value $encryptedBase64 -Encoding Byte
+        [System.IO.File]::WriteAllBytes($outputFilePath, $encryptedBytes)
 
         Write-Host "File encrypted successfully."
     } catch {
@@ -32,8 +30,8 @@ function TripleDES-EncryptFile {
 }
 
 # Example usage:
-$inputFilePath = "CHANGE ME"
-$outputFilePath = "CHANGE ME"
+$inputFilePath = "C:\Users\aidan\OneDrive\Desktop\XenoRAT\fff.exe"
+$outputFilePath = "C:\Users\aidan\OneDrive\Desktop\XenoRAT\fff.cpt"
 $password = "YourActualPassphraseHere"
 
 TripleDES-EncryptFile -inputFilePath $inputFilePath -outputFilePath $outputFilePath -pass $password
