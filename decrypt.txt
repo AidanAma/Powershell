@@ -14,10 +14,12 @@ function TripleDES-DecryptFile {
         $DESDecrypter = $TripleDES.CreateDecryptor()
 
         # Read the content of the encrypted file
-        $encryptedContent = Get-Content -Path $inputFilePath -Raw
+        $encryptedBase64 = Get-Content -Path $inputFilePath -Encoding Byte
+
+        # Convert Base64 string to bytes
+        $encryptedBytes = [System.Convert]::FromBase64String([System.Text.Encoding]::UTF8.GetString($encryptedBase64))
 
         # Decrypt the content
-        $encryptedBytes = [System.Convert]::FromBase64String($encryptedContent)
         $decryptedBytes = $DESDecrypter.TransformFinalBlock($encryptedBytes, 0, $encryptedBytes.Length)
 
         # Write the decrypted content to a new file
